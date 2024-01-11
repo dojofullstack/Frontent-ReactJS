@@ -1,0 +1,26 @@
+
+
+
+.btn-pay {
+    color: purple;
+}
+
+
+.main {
+    border: 3px solid purple;
+}
+
+.btn-visitas {
+    cursor: pointer;
+    background-color: purple;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: white;
+}
+
+.brand {
+    padding: 20px;
+    font-size: 18px;
+    margin: 10px;
+}

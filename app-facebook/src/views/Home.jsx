@@ -1,5 +1,5 @@
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import Main from "../components/Main";
 
 
@@ -17,7 +17,7 @@ const Home = () => {
             <Header/>
 
 
-            <Main imagen={imagen} />
+             <Main imagen={imagen}  slogan={'compran nikes en 2024'} />
 
 
             <Footer/>
