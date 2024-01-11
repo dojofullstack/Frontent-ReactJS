@@ -1,0 +1,34 @@
+
+
+.addTodoList {
+    padding: 10px 20px;
+    font-size: 20px;
+    margin: 10px;
+}
+
+
+.btn-todolist {
+    border: none;
+    padding: 7px 10px;
+    color: white;
+    background-color: purple;
+}
+
+
+.boxTareas {
+    border: 5px solid white;
+    padding: 20px;
+}
+
+.itemTask {
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    color: pink;
+    padding: 10px;
+}
+
+.footerTodolist {
+    margin-top: 10px;
+    border: 1px solid white;
+}
