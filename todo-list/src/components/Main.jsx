@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import getUser, {loginUser} from "../assets/modules/Auth";
 import Header from "../components/Header";
+import TodoAppContext from "../context";
 
 
 
@@ -9,30 +10,36 @@ import Header from "../components/Header";
 const Main = () => {
 
     const [inputTask, setInputTask] = useState('');
-    const [listTask, setListTask] = useState([]);
-    const [user, setUser] = useState({});
 
-    console.log('User Info',user);
+    // const [listTask, setListTask] = useState([]);
+    // const [user, setUser] = useState({});
+
+    const {todoApp, loadTask} = useContext(TodoAppContext);
 
 
-    const getUserData = async () => {
-        const data = await getUser();
-        setUser(data);
-    }
+    console.log('consumer testing', todoApp);
+    // console.log('User Info',user);
 
-    
+
+    // const getUserData = async () => {
+    //     const data = await getUser();
+    //     setUser(data);
+    // }
+
+
+    // useEffect(() => {
+    //     getUserData();
+
+    // }, []);
+
 
     useEffect(() => {
-        getUserData();
-
-    }, []);
-
-
-    useEffect(() => {
-        if (listTask.length === 0){
+        if (todoApp.listTask.length === 0){
             axios.get('https://dummyjson.com/todos').then( data => {
                 console.log(data.data.todos);
-            setListTask(data.data.todos);
+
+            loadTask(data.data.todos);
+            // setListTask(data.data.todos);
         })
         }
     }, []);
@@ -52,21 +59,21 @@ const Main = () => {
         // newList.push(inputTask)
         // setListTask(newList);
 
-        const newTask = {
-            "todo": inputTask,
-            "completed": false,
-            "userId": 1
-          }
+        // const newTask = {
+        //     "todo": inputTask,
+        //     "completed": false,
+        //     "userId": 1
+        //   }
 
-        setListTask( (listTask) => [ ...listTask,  newTask ] );
-        setInputTask('');
+        // setListTask( (listTask) => [ ...listTask,  newTask ] );
+        // setInputTask('');
 
     }    
 
     return (
         <>  
 
-            <Header dataUser={user}  />
+            <Header dataUser={todoApp.user}  />
 
             <h1>TodoList</h1>   
 
@@ -79,7 +86,7 @@ const Main = () => {
 
                 <ul>
 
-                {listTask.map((item, index) => (
+                {todoApp.listTask.map((item, index) => (
 
                         <li className="itemTask" key={index}> {item.todo} </li>
                     ))}
@@ -90,10 +97,10 @@ const Main = () => {
             </div>
 
             <div className="footerTodolist">
-                    <span>Total: {listTask.length}</span>
+                    <span>Total: {todoApp.listTask.length}</span>
                     
                     <div>
-                        <button onClick={() => setListTask((listTask) => [])}>Eliminar tareas</button>
+                        <button onClick={() => {}}>Eliminar tareas</button>
                     </div>
             </div>
 
