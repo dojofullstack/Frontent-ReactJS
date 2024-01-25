@@ -91,9 +91,13 @@ const Main = () => {
 
 
     const editableTask = (itemTask, titleTask) => {
-        itemTask.todo = titleTask;
 
-        updateTask(itemTask);
+        // itemTask.todo = titleTask;
+
+        // refactorizar con el operador spread
+        const newTask = {...itemTask, todo: titleTask};
+
+        updateTask(newTask);
 
         setEdicionActive(false);
 
