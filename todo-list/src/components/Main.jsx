@@ -10,11 +10,19 @@ import TodoAppContext from "../context";
 const Main = () => {
 
     const [inputTask, setInputTask] = useState('');
+    const [inputEditTask, setInputEditTask] = useState('');
 
     // const [listTask, setListTask] = useState([]);
-    // const [user, setUser] = useState({});
+    const [edicionActive, setEdicionActive] = useState(false);
+    const [idEdicion, setidEdicion] = useState(0);
 
-    const {todoApp, loadTask} = useContext(TodoAppContext);
+    // const [edicion, seEdicion] = useState({
+    //     active: true,
+    //     idTask: 0
+    // })
+
+
+    const {todoApp, loadTask, addTask, removeTask, updateTask} = useContext(TodoAppContext);
 
 
     console.log('consumer testing', todoApp);
@@ -36,7 +44,7 @@ const Main = () => {
     useEffect(() => {
         if (todoApp.listTask.length === 0){
             axios.get('https://dummyjson.com/todos').then( data => {
-                console.log(data.data.todos);
+                // console.log(data.data.todos);
 
             loadTask(data.data.todos);
             // setListTask(data.data.todos);
@@ -47,9 +55,9 @@ const Main = () => {
 
 
 
-    useEffect(() => {
-        console.log('el estado inpustack ha sido modificoado');
-    }, [inputTask]);
+    // useEffect(() => {
+    //     console.log('el estado inpustack ha sido modificoado');
+    // }, [inputTask]);
     // por default el hhok useeffect depende de todos los estados del componentes
     // el hook useeffect con el segundo param con corchetes vacio inidica no depende de estados
 
@@ -59,16 +67,44 @@ const Main = () => {
         // newList.push(inputTask)
         // setListTask(newList);
 
-        // const newTask = {
-        //     "todo": inputTask,
-        //     "completed": false,
-        //     "userId": 1
-        //   }
-
         // setListTask( (listTask) => [ ...listTask,  newTask ] );
         // setInputTask('');
 
+        const idRandom = parseInt(Math.random()*1000000);
+
+        const newTask = {
+            "id": idRandom,
+            "todo": inputTask,
+            "completed": false,
+            "userId": 1
+          }
+
+        addTask(newTask);
     }    
+
+
+
+    const editartask = (task) => {
+
+        setEdicionActive(true);
+        setidEdicion(task.id);
+
+        setInputEditTask(task.todo);
+
+    }
+
+
+    const editableTask = (itemTask, titleTask) => {
+        itemTask.todo = titleTask;
+
+        updateTask(itemTask);
+
+        setEdicionActive(false);
+
+    }
+
+
+
 
     return (
         <>  
@@ -79,7 +115,7 @@ const Main = () => {
 
             <input value={inputTask} className="addTodoList" placeholder="Agregar tarea" onChange={(e) => setInputTask(e.target.value)}  />
 
-            <button onClick={AddTodoList}  className="btn-todolist">crear tarea</button>
+            <button onClick={() => AddTodoList() }  className="btn-todolist">Crear tarea</button>
 
 
             <div className="boxTareas">
@@ -87,8 +123,35 @@ const Main = () => {
                 <ul>
 
                 {todoApp.listTask.map((item, index) => (
+                        
+                        <li className="itemTask" key={index}>
 
-                        <li className="itemTask" key={index}> {item.todo} </li>
+                            <div className="d-flex">
+
+
+                                {(!edicionActive || item.id !== idEdicion) &&  <p className="text-dark me-auto">{item.todo} </p>}
+                                
+
+                                {edicionActive && item.id === idEdicion &&
+                                <input value={inputEditTask} className="addTodoList" onChange={(e) => setInputEditTask(e.target.value) }  />
+                                }
+
+                                {edicionActive && item.id == idEdicion && 
+                                <button onClick={() =>  editableTask(item, inputEditTask) } className="btn btn-warning me-1">Guardar</button>
+                                }
+
+
+                                {(!edicionActive || item.id !== idEdicion) && 
+                                <button onClick={() =>  editartask(item) } className="btn btn-warning me-1">Editar</button>
+                                }
+
+
+
+                                <button onClick={() => removeTask(item.id) } className="btn btn-danger">Eliminar</button>
+                            </div>
+                            
+                            
+                             </li>
                     ))}
 
                 </ul>

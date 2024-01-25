@@ -41,13 +41,72 @@ const Rutas = () => {
     }
 
 
+    const addTask = (tasks) => {
+
+        setTodoApp( todoApp => ({
+            ...todoApp,
+            listTask: [...todoApp.listTask, tasks]
+        })
+        )
+    }
+
+
+    const removeTask = (idTask) => {
+
+        const tasksNews = todoApp.listTask.filter( task => task.id !== idTask );
+
+        setTodoApp(
+            todoApp => (
+                {
+                    ...todoApp,
+                    listTask: tasksNews
+                }
+            )
+        )
+
+    }
+
+
+
+    const updateTask = (task) => {
+
+
+        const tasksNews = todoApp.listTask.map((item => {
+                if (task.id === item.id){
+                    return task
+                } else {
+                    return item
+                }
+
+        }))
+
+        // console.log(tasksNews);
+
+        setTodoApp(
+            todoApp => (
+                {
+                    ...todoApp,
+                    listTask: tasksNews
+                }
+            )
+        )
+        
+
+
+    }
+
+
+
 
     return (
 
         <TodoAppContext.Provider value={{
             todoApp,
             loadTask,
-            updateCompletado
+            updateCompletado,
+            addTask,
+            removeTask,
+            updateTask
         }} >
 
                 <BrowserRouter>
