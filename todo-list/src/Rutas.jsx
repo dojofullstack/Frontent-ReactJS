@@ -70,15 +70,18 @@ const Rutas = () => {
 
     const updateTask = (task) => {
 
+        // const updatedTasks = todoApp.listTask.map((item => {
+        //         if (task.id === item.id){
+        //             return task
+        //         } else {
+        //             return item
+        //         }
 
-        const tasksNews = todoApp.listTask.map((item => {
-                if (task.id === item.id){
-                    return task
-                } else {
-                    return item
-                }
+        // }))
 
-        }))
+        // code refactoring
+        const updatedTasks = todoApp.listTask.map(item => (item.id === task.id ? task : item));
+
 
         // console.log(tasksNews);
 
@@ -86,12 +89,11 @@ const Rutas = () => {
             todoApp => (
                 {
                     ...todoApp,
-                    listTask: tasksNews
+                    listTask: updatedTasks
                 }
             )
         )
         
-
 
     }
 

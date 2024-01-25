@@ -16,11 +16,6 @@ const Main = () => {
     const [edicionActive, setEdicionActive] = useState(false);
     const [idEdicion, setidEdicion] = useState(0);
 
-    // const [edicion, seEdicion] = useState({
-    //     active: true,
-    //     idTask: 0
-    // })
-
 
     const {todoApp, loadTask, addTask, removeTask, updateTask} = useContext(TodoAppContext);
 
@@ -68,7 +63,6 @@ const Main = () => {
         // setListTask(newList);
 
         // setListTask( (listTask) => [ ...listTask,  newTask ] );
-        // setInputTask('');
 
         const idRandom = parseInt(Math.random()*1000000);
 
@@ -80,6 +74,8 @@ const Main = () => {
           }
 
         addTask(newTask);
+        setInputTask('');
+
     }    
 
 

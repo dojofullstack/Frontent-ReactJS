@@ -24,11 +24,11 @@ const Header = ({dataUser}) => {
               <input
                 className="form-control me-2"
                 type="search"
-                placeholder="Search"
-                aria-label="Search"
+                placeholder="Buscar tareas"
+                aria-label="Buscar"
               />
               <button className="btn btn-outline-success" type="submit">
-                Search
+                Buscar 
               </button>
             </form>
 
