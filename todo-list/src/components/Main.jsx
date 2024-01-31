@@ -93,14 +93,18 @@ const Main = () => {
     const editableTask = (itemTask, titleTask) => {
 
         // itemTask.todo = titleTask;
-
         // refactorizar con el operador spread
         const newTask = {...itemTask, todo: titleTask};
 
         updateTask(newTask);
-
         setEdicionActive(false);
 
+    }
+
+
+    const completarTask = (itemTask) => {
+        const newTask = {...itemTask, completed: true};
+        updateTask(newTask);
     }
 
 
@@ -129,8 +133,14 @@ const Main = () => {
                             <div className="d-flex">
 
 
-                                {(!edicionActive || item.id !== idEdicion) &&  <p className="text-dark me-auto">{item.todo} </p>}
+                                {(!edicionActive || item.id !== idEdicion) &&
+                                    item.completed ?  <p className="me-auto text-success text-decoration-line-through">{item.todo} </p> : <p className="text-dark me-auto">{item.todo} </p> 
+                                }
                                 
+
+                                {!item.completed &&  <button onClick={() => completarTask(item) } className="btn btn-success me-2">Completar</button>}
+
+
 
                                 {edicionActive && item.id === idEdicion &&
                                 <input value={inputEditTask} className="addTodoList" onChange={(e) => setInputEditTask(e.target.value) }  />

@@ -7,7 +7,8 @@ export const todoAppList = {
     listTask: [],
     completados: [],
     eliminados: [],
-    user: {}
+    user: {},
+    isLogin: false
 }
 
 
