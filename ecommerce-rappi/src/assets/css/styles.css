@@ -1,0 +1,20 @@
+
+
+
+.dojo-product {
+    box-shadow: 3px 3px 6px 0px #fafafa80;
+    margin: 5px;
+    border-radius: 10px;
+    width: 450px;
+    padding: 10px;
+}
+
+.dojo-product img {
+    border-radius: 20px;
+    height: 100px;
+    width: 100px;
+}
+
+.dojo-product div {
+    width: 80%;
+}
