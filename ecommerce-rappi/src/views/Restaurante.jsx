@@ -3,10 +3,12 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import useEcommerceStore from "../store";
 
 const Restaurant = () => {
   const [marcas, setMarcas] = useState([]);
   const navigate =  useNavigate();
+  // const statecontadorVisitas = useEcommerceStore((state) => state.contadorVisitas);
 
 
   console.log("log estado", marcas);
@@ -40,12 +42,15 @@ const Restaurant = () => {
       });
   }, []);
 
+
   return (
     <>
+
+
       <div className="flex flex-wrap">
         {marcas.length > 0 &&
           marcas.map((data, index) => (
-            <div className="card w-96 bg-base-100 shadow-xl m-2" key={index} onClick={() => navigate(`/Restaurantes/${data.brand_id}`)}>
+            <div className="card w-96 bg-base-100 shadow-xl m-2" key={index} onClick={() => navigate(`/Restaurantes/${data.store_id}`)}>
               <figure>  
                 <img src={data.full_background} alt="" />
               </figure>

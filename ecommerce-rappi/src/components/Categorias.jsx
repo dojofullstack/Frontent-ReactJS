@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import useEcommerceStore from "../store";
 
 
 
@@ -6,12 +7,15 @@ const categorias = ['Restaurantes', 'Supermecardo', 'Boticas'];
 
 const Categorias = () => {
 
-    const navigate = useNavigate();
+  // const statecontadorVisitas = useEcommerceStore((state) => state.contadorVisitas);
+  const navigate = useNavigate();
 
+    // console.log('statecontadorVisitas', statecontadorVisitas);
 
     return (
         
         <div className="flex">
+      
 
             {
                       categorias.map((item, index) => (
