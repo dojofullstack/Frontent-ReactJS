@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const LoginForm = () => {
+const RegisterForm = () => {
 
-    const Login =  useEcommerceStore((state) =>  state.Login);
+    const register =  useEcommerceStore((state) =>  state.register);
     const user =  useEcommerceStore((state) =>  state.user);
     const inputRefEmail =  useRef();
     const inputRefPwd =  useRef();
+    const inputRefName = useRef();
     const navigate =  useNavigate();
 
 
@@ -40,12 +41,32 @@ const LoginForm = () => {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-black">
-            Iniciar sesion
+            Registrar usuario
           </h2>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <div className="space-y-6" >
+
+          <div>
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-black">
+                Nombre:
+              </label>
+              <div className="mt-2">
+                <input
+                ref={inputRefName}
+                  id="firstName"
+                  name="firstName"
+                  type="text"
+                  autoComplete="firstName"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-black">
                 Email:
@@ -89,19 +110,19 @@ const LoginForm = () => {
 
             <div>
               <button
-                onClick={() => Login(inputRefEmail.current.value, inputRefPwd.current.value)}
+                onClick={() => register(inputRefName.current.value ,inputRefEmail.current.value, inputRefPwd.current.value)}
                 type="btn"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Iniciar
+                Registrate
               </button>
             </div>
           </div>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            No eres usuario?{' '}
-            <a  onClick={() => navigate('/register')}  className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              registrate aqui
+            ya eres usuario?{' '}
+            <a  onClick={() => navigate('/login')}  className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                inicia sesion aqui
             </a>
           </p>
         </div>
@@ -110,16 +131,16 @@ const LoginForm = () => {
 } 
 
 
-const Login = () => {
+const Register = () => {
     return (
 
         <>
                 <Header/>
-                <LoginForm/>
+                <RegisterForm/>
                 <Footer/>
         </>
 
     )
 }
 
-export default Login;
+export default Register;

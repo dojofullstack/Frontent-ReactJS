@@ -39,6 +39,31 @@ const updateProductDetail = (set, productID) => {
 
 
 
+const register = (set, name, email, password) => {
+    const API_REGISTER  = 'https://api.dojopy.com/api/accounts/register/';
+
+    const body = {
+        "email": email,
+        "first_name":name,
+        "password": password,
+        'username': email
+    }
+
+    axios.post(API_REGISTER, body).then((data) => {
+        
+        if (data.data.id){
+            console.log('registro correcto', data.data.id);
+            Login(set, email, password);
+        }
+
+    })
+
+
+
+} 
+
+
+
 const Login = (set, username, password) => {
     
     const API_LOGIN  = 'https://api.dojopy.com/api/token/';
@@ -87,8 +112,32 @@ const checkLogin = async (set) => {
         set((state) => ({ user: dataUser, isLoginActive: true  }))
 
     }
+}
+
+
+const addCartItem = (set, product, cantidad) => {
+
+    const item = {
+        product: product,
+        cantidad: cantidad
+    }
+
+    set((state) => ({cart: [...state.cart, item ]  }) )
 
 }
+
+
+const clearCart = (set) => {
+    set((state) => ({cart: []  }) )
+}
+
+
+
+const loginClose = (set) => {
+    localStorage.removeItem('token');
+    set((state) => ({user: {}, isLoginActive: false} ));
+}
+
 
 
 
@@ -102,11 +151,15 @@ const useEcommerceStore = create((set) => ({
     detailProduct: [],
     user: {},
     isLoginActive: false,
-    cart: {},
+    cart: [],
     contadorVisitas: 0,
     increasePopulation: () => set((state) => ({ contadorVisitas: state.contadorVisitas + 1 })),
     Login: (email, password) => Login(set, email, password),
-    checkLogin: () => checkLogin(set)
+    checkLogin: () => checkLogin(set),
+    addCartItem: (product, cantidad) => addCartItem(set, product, cantidad),
+    clearCart: () => clearCart(set),
+    loginClose: () => loginClose(set),
+    register: (name, email, password) => register(set, name, email, password)
   }))
 
 export default useEcommerceStore;

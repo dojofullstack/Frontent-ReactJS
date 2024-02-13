@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useEcommerceStore from "../store";
+import { TOKEN } from "../APIS";
 
 const Restaurant = () => {
   const [marcas, setMarcas] = useState([]);
@@ -14,9 +15,7 @@ const Restaurant = () => {
   console.log("log estado", marcas);
 
   useEffect(() => {
-    const access_token =
-      "Bearer ft.gAAAAABlvnh3kh0lZbMgWPr-SoyP1_xqP9vKvHnyWvEdNKv4oKH2aJsX1rI6gMZJjz4SzA6ItgrkqhzA_CmBTnowgJ6Ivifqh_9Q0GQnszUn-JvAtHDJEO_kiPP7icIPR0cjCp1OKWFqVoxFDPSMcVRSA-RcVkhyjZiypoecaQ3QbFuMqKWsZxBdunL_DYUMidOLVnFcBbvwJ4O2-51VhaqcJiO_bF4jY4BCJP5LWkrp-4LZ6ROgGdxwu53F_tbFzBoVlOSggQaDq7_TvHpt_nDO9H3IeYW_24Zhzq7gCM35EoDtST9rzs0yfn4o_2yFMUBLBorFnhyrm27ukur8t90ndWey4W0suVtZev4GVoK2IS7kwVmeOtg=";
-    axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+    axios.defaults.headers.common["Authorization"] = TOKEN;
 
     const payload = {
       lat: -13.5223702,

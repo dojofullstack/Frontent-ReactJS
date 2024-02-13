@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useEcommerceStore from "../store";
+import { useState } from "react";
 
 
 
@@ -9,20 +10,11 @@ export const ModalDetail = () => {
   const productDetail =  useEcommerceStore ((state) =>  state.productDetail);
   const navigate = useNavigate();
   const isLoginActive =  useEcommerceStore ((state) =>  state.isLoginActive);
+  const addCartItem = useEcommerceStore((state) =>  state.addCartItem);
+
+  const [cantidad, setCantidad] =  useState(1);
 
 
-
-
-  const completarPedido = () => {
-    console.log('isLoginActive', isLoginActive);
-    if (!isLoginActive){
-      navigate('/login');
-    } else {
-      navigate('/checkout');
-    }
-  
-  }
-  
 
   
 
@@ -56,7 +48,11 @@ export const ModalDetail = () => {
       <form method="dialog">
         {/* if there is a button, it will close the modal */}
         <button className="btn me-5">Cerrar</button>
-        <button onClick={() => completarPedido()} className="btn btn-success">Completar pedido</button>
+
+        <input value={cantidad} onChange={(e) => setCantidad(e.target.value)} type="number" placeholder="" className="input input-bordered input-primary w-[70px] mx-5" />
+
+
+        <button onClick={() => addCartItem(productDetail, Number(cantidad)) } className="btn btn-success">Agregar al carrito</button>
       </form>
     </div>
   </div>
