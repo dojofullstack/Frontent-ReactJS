@@ -15,6 +15,9 @@ const CheckoutForm = () => {
   const [saveAdress, setsaveAdress] = useState(false);
   const cart = useEcommerceStore((state) => state.cart);
   const [subTotal, setSubTotal] = useState(0);
+  const addressPrincipal = useEcommerceStore((state) => state.addressPrincipal);
+
+
 
   useEffect(() => {
 
@@ -36,7 +39,7 @@ const CheckoutForm = () => {
           <div className="my-1">
           <label>Direccion:</label>
           <input
-            value={adress}
+            value={addressPrincipal}
             onChange={(e) => setAdress(e.target.value)}
             type="text"
             placeholder="Ingresar direccion"

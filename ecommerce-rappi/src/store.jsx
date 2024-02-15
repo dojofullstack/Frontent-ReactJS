@@ -3,6 +3,7 @@ import { create } from 'zustand'
 
 
 const updateProducts = (set, products) => {
+    
     const allProduct = products.corridors.map((item) => {
         // console.log('item.products', item.products)
         return item.products.map((product, index) => (
@@ -15,7 +16,7 @@ const updateProducts = (set, products) => {
     // console.log('allProduct', news);
 
     return (
-        set((state) => ({ products: news }))
+        set((state) => ({ products: news, infoBrand: products }))
     )
 
 }
@@ -159,7 +160,10 @@ const useEcommerceStore = create((set) => ({
     addCartItem: (product, cantidad) => addCartItem(set, product, cantidad),
     clearCart: () => clearCart(set),
     loginClose: () => loginClose(set),
-    register: (name, email, password) => register(set, name, email, password)
+    register: (name, email, password) => register(set, name, email, password),
+    updatedAddressPrincipal: (adress) => set((state) => ({ addressPrincipal: adress})),
+    addressPrincipal: 'Lima / Perú',
+    infoBrand: ''
   }))
 
 export default useEcommerceStore;

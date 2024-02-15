@@ -2,11 +2,15 @@
 
 
 .dojo-product {
-    box-shadow: 3px 3px 6px 0px #fafafa80;
-    margin: 5px;
-    border-radius: 10px;
-    width: 450px;
-    padding: 10px;
+    cursor: pointer;
+    box-shadow: 3px 3px 10px 0px #607D8B;
+    margin: 10px;
+    border-radius: 15px;
+    min-width: 250px;
+    max-width: 410px;
+    padding: 15px;
+    height: 200px;
+    overflow: hidden;
 }
 
 .dojo-product img {
@@ -17,4 +21,21 @@
 
 .dojo-product div {
     width: 80%;
+}
+
+.dojo-product:hover {
+    transform: scale(1.05);
+}
+
+.dojo-product {
+    transition: transform 0.5s ease-out;
+}
+
+.menu-order:hover {
+    transform: scale(1.1);
+}
+
+.menu-order {
+    cursor: pointer;
+    transition: transform 0.5s ease-out;
 }

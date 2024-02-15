@@ -2,6 +2,12 @@ import { useEffect } from "react";
 import useEcommerceStore from "../store";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaAngleDown } from "react-icons/fa";
+
+
+
 
 const Cart = () => {
   const cart = useEcommerceStore((state) => state.cart);
@@ -77,6 +83,8 @@ const Header = () => {
   const isLoginActive = useEcommerceStore((state) => state.isLoginActive);
   const checkLogin = useEcommerceStore((state) => state.checkLogin);
   const loginClose = useEcommerceStore((state) => state.loginClose);
+  const addressPrincipal = useEcommerceStore((state) => state.addressPrincipal);
+  const navigate = useNavigate();
 
   useEffect(() => {
     checkLogin();
@@ -87,24 +95,42 @@ const Header = () => {
       <Cart />
 
       <div className="navbar bg-base-100">
-        <div className="flex-1">
-          <a className="btn btn-ghost text-xl">Ecommerce Rappi</a>
+        <div className="flex-1" >
+          <img className="h-12 border rounded-xl" src="/static/image/logo_rappi.jpg" />
+          <a  onClick={() => navigate('/')} className="btn btn-ghost text-xl">Pedidos Rappi</a>
+
+          <button onClick={() => navigate('/config-address')} className="max-w-[300px] btn btn-outline btn-secondary mx-3">
+            <FaMapMarkerAlt className="text-2xl"/>
+            {addressPrincipal}
+            <FaAngleDown/>
+            </button>
+
+
         </div>
+
         <div className="flex-none gap-2">
+
+        <div className="form-control  w-full md:w-[350px] mx-auto ">
+            <input
+              type="text"
+              placeholder="Buscar en Rappi"
+              className="input input-bordered"
+            />
+          </div>
+
+          <button onClick={() => navigate('/login')} className="btn btn-outline btn-success">
+          <FaUserCircle className="text-2xl" />
+          Ingresar</button>
+
+
           <label
             htmlFor="my-drawer-4"
-            className="drawer-button btn btn-primary"
+            className="drawer-button btn btn-error text-white mx-1"
           >
             <FaShoppingCart className="text-2xl" />
           </label>
 
-          <div className="form-control">
-            <input
-              type="text"
-              placeholder="Search"
-              className="input input-bordered w-24 md:w-auto"
-            />
-          </div>
+     
 
           {isLoginActive && (
             <div className="dropdown dropdown-end">
@@ -146,7 +172,17 @@ const Header = () => {
             </div>
           )}
         </div>
+
+        
       </div>
+
+      <div className="text-sm breadcrumbs ms-10">
+  <ul>
+    <li onClick={() => navigate('/')} ><a>Categorias</a></li> 
+    <li onClick={() => navigate('/restaurantes')} ><a>Restaurantes</a></li> 
+    <li>Supermercados</li>
+  </ul>
+</div>
     </>
   );
 };

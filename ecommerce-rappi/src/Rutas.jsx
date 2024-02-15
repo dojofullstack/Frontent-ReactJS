@@ -5,6 +5,7 @@ import ProductosMarca from "./views/ProductosMarca";
 import Login from "./views/Login";
 import Checkout from "./views/Checkout";
 import Register from "./views/Register";
+import { ConfigAddress } from "./views/ConfigAddress";
 
 const Rutas = () => {
   return (
@@ -16,6 +17,7 @@ const Rutas = () => {
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/restaurantes" element={<Restaurante/>} />  
       <Route path="/restaurantes/:marcaID" element={<ProductosMarca/>} />  
+      <Route path="/config-address" element={<ConfigAddress/>} />  
       </Routes>
     </BrowserRouter>
   );
