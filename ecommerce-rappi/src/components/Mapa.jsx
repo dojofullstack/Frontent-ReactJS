@@ -10,8 +10,10 @@ import {
 } from "@react-google-maps/api";
 import { useCallback, useRef, useState } from "react";
 import useEcommerceStore from "../store";
+import { useNavigate } from "react-router-dom";
 
 export const Mapa = () => {
+  const navigate =  useNavigate();
 
   const updatedAddressPrincipal = useEcommerceStore((state) => state.updatedAddressPrincipal);
 
@@ -77,7 +79,12 @@ export const Mapa = () => {
 
 
         <div className="mb-3">
-          <button onClick={() => updatedAddressPrincipal(myaddres)} className="btn btn-success text-white">Guardar direccion</button>
+          <button onClick={() => {
+            navigate(-1);
+            updatedAddressPrincipal(myaddres);
+            }} className="btn btn-success text-white">
+            Guardar direccion
+            </button>
         </div>
 
         <GoogleMap

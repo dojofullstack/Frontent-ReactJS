@@ -6,11 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
 
-  
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://js.openpay.pe/openpay.v1.min.js"></script>
+    <script type='text/javascript' src="https://js.openpay.pe/openpay-data.v1.min.js"></script>
 
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+
+OpenPay.setId('mzdtln0bmtms6o3kck8f');
+OpenPay.setApiKey('pk_f0660ad5a39f4912872e24a7a660370c');
+OpenPay.setSandboxMode(true);
+
+
+var deviceSessionId = OpenPay.deviceData.setup("payment-form", "deviceIdHiddenFieldName");
+      
+      console.log('deviceSessionId',deviceSessionId);
+
+    </script>
   </body>
 </html>

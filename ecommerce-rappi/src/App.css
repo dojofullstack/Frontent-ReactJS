@@ -11,3 +11,9 @@
 .pac-logo, .pac-item, .pac-container {
     z-index: 9999999 !important;
 }
+
+
+.card-body :where(p) {
+    flex-grow: 0;
+    padding: 5px;
+}
